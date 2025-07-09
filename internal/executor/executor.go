@@ -37,9 +37,17 @@ func RunAndCapture(cmdStr string) (*types.ErrorInfo, error) {
 }
 
 func LogError(logDir string, errInfo *types.ErrorInfo, suggestion string) error {
-	if _, err := os.Stat(logDir); os.IsNotExist(err) {
-		os.MkdirAll(logDir, 0755)
+	if !filepath.IsAbs(logDir) {
+		home, _ := os.UserHomeDir()
+		logDir = filepath.Join(home, ".cmdr")
 	}
+
+	if _, err := os.Stat(logDir); os.IsNotExist(err) {
+		if err := os.MkdirAll(logDir, 0755); err != nil {
+			return err
+		}
+	}
+
 	filename := fmt.Sprintf("%s/%d_%s.log", logDir, errInfo.Timestamp.Unix(), sanitizeFilename(errInfo.Command))
 	f, err := os.Create(filename)
 	if err != nil {

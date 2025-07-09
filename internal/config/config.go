@@ -18,6 +18,9 @@ type Config struct {
 }
 
 func Load() *Config {
+	home, _ := os.UserHomeDir()
+	defaultLogDir := filepath.Join(home, ".cmdr")
+
 	// Defaults
 	cfg := &Config{
 		Provider:         os.Getenv("CMDRAI_PROVIDER"),
@@ -27,10 +30,12 @@ func Load() *Config {
 		OllamaHost:       os.Getenv("CMDRAI_OLLAMA_HOST"),
 		OllamaModel:      os.Getenv("CMDRAI_OLLAMA_MODEL"),
 		Enabled:          true,
-		LogDir:           "./cmdr",
+		LogDir:           defaultLogDir,
 	}
 
-	home, _ := os.UserHomeDir()
+	if envLogDir := os.Getenv("CMDRAI_LOG_DIR"); envLogDir != "" {
+		cfg.LogDir = envLogDir
+	}
 	paths := []string{".cmdrconfig", filepath.Join(home, ".cmdrconfig")}
 	for _, path := range paths {
 		if f, err := os.ReadFile(path); err == nil {
@@ -68,6 +73,12 @@ func Load() *Config {
 	}
 	if cfg.Provider == "" {
 		cfg.Provider = "openai"
+	}
+
+	if err := os.MkdirAll(cfg.LogDir, 0755); err != nil {
+
+		cfg.LogDir = defaultLogDir
+		os.MkdirAll(cfg.LogDir, 0755)
 	}
 
 	return cfg
