@@ -18,7 +18,7 @@
 
 ## 📦 Installation
 
-### 1.
+### 1. Install on Brew
 MacOS
 ```sh
   brew tap diegodev2/cmdr
