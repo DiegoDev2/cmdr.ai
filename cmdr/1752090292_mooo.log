@@ -1,0 +1,13 @@
+Command: mooo
+ExitCode: 127
+Timestamp: 2025-07-09T15:44:52-04:00
+
+STDOUT:
+
+
+STDERR:
+bash: mooo: command not found
+
+
+SUGGESTION:
+

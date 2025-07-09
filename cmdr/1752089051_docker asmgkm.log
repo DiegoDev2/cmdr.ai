@@ -1,0 +1,15 @@
+Command: docker asmgkm
+ExitCode: 1
+Timestamp: 2025-07-09T15:24:11-04:00
+
+STDOUT:
+
+
+STDERR:
+docker: unknown command: docker asmgkm
+
+Run 'docker --help' for more information
+
+
+SUGGESTION:
+
