@@ -1,0 +1,5 @@
+   api_key=sk-...tu_api_key...
+   model=gpt-4o-mini
+   provider=openai
+   enabled=1
+   log_dir=./cmdr
