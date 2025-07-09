@@ -171,6 +171,9 @@ log_dir=./cmdr
 
 ---
 
+
+![Frame 11](https://github.com/user-attachments/assets/ce43f7c8-aa17-4ab4-a8f2-ff17ddd70bd1)
+
 ## 📄 License
 
 MIT License. See [LICENSE](LICENSE) for details.
