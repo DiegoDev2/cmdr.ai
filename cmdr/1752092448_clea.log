@@ -1,0 +1,15 @@
+Command: clea
+ExitCode: 127
+Timestamp: 2025-07-09T16:20:48-04:00
+
+STDOUT:
+
+
+STDERR:
+bash: clea: command not found
+
+
+SUGGESTION:
+1. Check the command you intended to use; it should be "clear" instead of "clea".  
+2. Type "clear" in the terminal and press Enter.  
+3. If you need to alias it, run `alias clea='clear'` in your shell configuration file.
