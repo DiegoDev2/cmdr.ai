@@ -2,6 +2,13 @@
 
 **cmdr.ai** is an AI-powered terminal copilot that automatically detects failed shell commands, analyzes errors using AI (OpenAI, OpenRouter, Ollama, etc.), and suggests practical fixes directly in your terminal. It is designed for developers and power users who want instant, actionable help when commands fail.
 
+
+
+
+https://github.com/user-attachments/assets/5b845023-ace1-442c-bc43-a7afc44855de
+
+
+
 ---
 
 ## 🚀 Features
