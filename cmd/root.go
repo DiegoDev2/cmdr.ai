@@ -31,15 +31,15 @@ func Main() {
 		fmt.Println("✅ Command succeeded.")
 		os.Exit(0)
 	}
-	stopChan := make(chan struct{})
-	ui.StartSpinner(stopChan)
+	s := ui.NewSpinner()
+	s.Start()
 	start := time.Now()
 	suggestion, err := ai.GetSuggestion(cfg, errInfo)
 	elapsed := time.Since(start)
-	if elapsed < 100*time.Millisecond {
-		time.Sleep(100*time.Millisecond - elapsed)
+	if elapsed < 30*time.Millisecond {
+		time.Sleep(30*time.Millisecond - elapsed)
 	}
-	close(stopChan)
+	s.Stop()
 	fmt.Print("\r")
 
 	if err != nil {

@@ -2,32 +2,35 @@ package ui
 
 import (
 	"fmt"
-	"time"
+	"os"
+
+	"github.com/charmbracelet/lipgloss"
 )
 
-var spinnerChars = []rune{'|', '/', '-', '\\'}
-
-func StartSpinner(stopChan <-chan struct{}) {
-	go func() {
-		i := 0
-		for {
-			select {
-			case <-stopChan:
-				fmt.Print("\r")
-				return
-			default:
-				fmt.Printf("\r\033[1;34mThinking %c\033[0m", spinnerChars[i%len(spinnerChars)])
-				time.Sleep(100 * time.Millisecond)
-				i++
-			}
-		}
-	}()
-}
+var (
+	borderStyle = lipgloss.NewStyle().
+			Border(lipgloss.RoundedBorder()).
+			BorderForeground(lipgloss.Color("8")).
+			Padding(0, 2).
+			Width(70)
+	titleStyle = lipgloss.NewStyle().
+			Foreground(lipgloss.Color("14")).
+			Bold(true)
+	contentStyle = lipgloss.NewStyle().
+			Foreground(lipgloss.Color("7")).
+			Italic(true)
+)
 
 func PrintSuggestion(suggestion string) {
-	fmt.Printf("\n\033[1;32mAI Suggestion:\033[0m %s\n", suggestion)
+	title := titleStyle.Render("AI Suggestion")
+	content := contentStyle.Render(suggestion)
+	box := borderStyle.Render(fmt.Sprintf("%s\n\n%s", title, content))
+	fmt.Fprintln(os.Stdout, "\n"+box+"\n")
 }
 
 func PrintError(err error) {
-	fmt.Printf("\n\033[1;31mcmdr.ai error:\033[0m %v\n", err)
+	title := titleStyle.Foreground(lipgloss.Color("1")).Render("cmdr.ai error")
+	content := contentStyle.Foreground(lipgloss.Color("1")).Render(err.Error())
+	box := borderStyle.Render(fmt.Sprintf("%s\n\n%s", title, content))
+	fmt.Fprintln(os.Stdout, "\n"+box+"\n")
 }
